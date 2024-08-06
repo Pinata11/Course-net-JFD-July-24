@@ -1,0 +1,132 @@
+<script>
+
+    // var nama = "Davin"
+    // var upahPerHari = 175000
+    // var hariKerja = 20
+    // var upahLembur = 55000
+    // var jamLembur = 7
+
+    // var gaji = upahPerHari * hariKerja
+    // var lembur = upahLembur * jamLembur
+    // var takeHomePay = gaji + lembur
+
+    // console.log(
+    //     'SLIP GAJI \n' +
+    //     '============ \n' +
+    //     'Staff: ' + nama + '\n' +
+    //     '------------ \n' +
+    //     'Total upah : ' + gaji + '\n' +
+    //     'Lembur : ' + lembur + '\n' +
+    //     '------------ \n' +
+    //     'Take Home Pay : Rp ' + takeHomePay.toLocaleString('id-ID') + '\n' +
+    //     '============ \n' +
+    //     'Terima kasih atas kerjaannya!' + '\n'
+    // )
+
+    // // function looping
+    // var karyawan = [
+    //     ["Vincent", 20, 7],
+    //     ["Udin", 15, 9],
+    //     ["Mamang", 10, 10]
+    // ]
+    // var upahPerHari = 175000
+    // var upahLembur = 55000
+
+    // function cetakSlipGaji(karyawan) {
+    //     for (var i = 0; i < karyawan.length; i++) {
+    //         var nama = karyawan[i][0];
+    //         var gaji = karyawan[i][1] * upahPerHari;
+    //         var lembur = karyawan[i][2] * upahLembur;
+    //         var takeHomePay = gaji + lembur;
+    //         console.log(
+    //             'SLIP GAJI \n' +
+    //             '============ \n' +
+    //             'Staff: ' + nama + '\n' +
+    //             '------------ \n' +
+    //             'Total upah : ' + gaji + '\n' +
+    //             'Lembur : ' + lembur + '\n' +
+    //             '------------ \n' +
+    //             'Take Home Pay : Rp ' + takeHomePay.toLocaleString('id-ID') + '\n' +
+    //             '============ \n' +
+    //             'Terima kasih atas kerjaannya!' + '\n'
+    //         )
+    //         console.log("________________________")
+    //     }
+    // }
+
+    // cetakSlipGaji(karyawan);
+
+    // input
+    var karyawan = [
+    ["Vincent", 20, 7],
+    ["Udin", 15, 9],
+    ["Mamang", 10, 10]
+    ];
+    var upahPerHari = 175000;
+    var upahLembur = 55000;
+
+    function tambahKaryawan() {
+        var nama = prompt("Masukkan nama karyawan:");
+        while (!nama) {
+            nama = prompt("Nama karyawan tidak boleh kosong. Masukkan nama karyawan:");
+        }
+        var hariKerja = parseInt(prompt("Masukkan jumlah hari kerja:"));
+        while (isNaN(hariKerja) || hariKerja < 0) {
+            hariKerja = parseInt(prompt("Jumlah hari kerja harus berupa angka non-negatif. Masukkan jumlah hari kerja:"));
+        }
+        var hariLembur = parseInt(prompt("Masukkan jumlah hari lembur:"));
+        while (isNaN(hariLembur) || hariLembur < 0) {
+            hariLembur = parseInt(prompt("Jumlah hari lembur harus berupa angka non-negatif. Masukkan jumlah hari lembur:"));
+        }
+        karyawan.push([nama, hariKerja, hariLembur]);
+    }
+
+    function cetakSlipGaji() {
+        var output = '';
+        for (var i = 0; i < karyawan.length; i++) {
+            var nama = karyawan[i][0];
+            var gaji = karyawan[i][1] * upahPerHari;
+            var lembur = karyawan[i][2] * upahLembur;
+            var takeHomePay = gaji + lembur;
+            output +=
+                'SLIP GAJI \n' +
+                '============ \n' +
+                'Staff: ' + nama + '\n' +
+                '------------ \n' +
+                'Total upah : ' + gaji.toLocaleString('id-ID') + '\n' +
+                'Lembur : ' + lembur.toLocaleString('id-ID') + '\n' +
+                '------------ \n' +
+                'Take Home Pay : Rp ' + takeHomePay.toLocaleString('id-ID') + '\n' +
+                '============ \n' +
+                'Terima kasih atas kerjaannya!\n\n';
+        }
+        alert(output);
+    }
+
+    function main() {
+        var isRunning = true;
+        while (isRunning) {
+            var pilihan = parseInt(prompt("Pilih opsi: \n1. Tambah Karyawan \n2. Cetak Slip Gaji \n3. Keluar"));
+            
+            switch (pilihan) {
+                case 1:
+                    tambahKaryawan();
+                    break;
+                case 2:
+                    cetakSlipGaji();
+                    break;
+                case 3:
+                    console.log("Terima kasih!");
+                    isRunning = false;
+                    break;
+                default:
+                    console.log("Pilihan tidak valid.");
+                    alert("Pilihan tidak valid.");
+            }
+        }
+    }
+
+    main();
+
+
+</script>

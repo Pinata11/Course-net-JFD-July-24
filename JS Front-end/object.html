@@ -1,0 +1,201 @@
+<script>
+    // Call object
+    var student = {
+        name : "Davin",
+        gpa : 3.73,
+        isGraduated : false,
+    }
+
+    console.log(student.name)
+    console.log(student.gpa)
+    console.log(student.isGraduated)
+
+    // ChangeToObject
+    var buah = ["Durian", 5000, true]
+    function changeToObject(array) {
+        var result = {}
+        result.buah = array[0]
+        result.harga = array[1]
+        result.enak = array[2]
+        return result
+    }
+    console.log(changeToObject(
+        ["Durian", 
+        50000, 
+        true]
+    ))
+
+    // ChangeToArray
+    var mahasiswa = {
+        nama : "Davin",
+        umur : 20,
+        kelas : "JFD",
+    }
+    function changeToArray(object) {
+        var result = []
+        result.push(object.nama)
+        result.push(object.umur)
+        result.push(object.kelas)
+        return result
+    }
+    console.log(changeToArray(mahasiswa))
+
+    var mobil = {
+        // key
+        name : "Civic",
+        cc : 5000,
+
+        // method
+        startEngine : function() {
+            console.log(this.name + "Mesin nyala")
+        }
+    }
+
+    // CONTOH
+    var murid = {
+        nama: 'Vin',
+        profesi: 'Developer',
+        ipk: 3.2,
+        lulus: function() {
+            if (this.ipk >= 3) {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    console.log(murid.nama)
+    console.log(murid['nama'])
+    console.log(murid.lulus())
+
+    // LATIHAN
+    var caca = {
+        nama: "caca",
+        berat: 45,
+        tinggi: 155,
+        hobi: ['Nonton', 'Makan', 'Travelling', 'Hiking'],
+        sebutkanHobby: function() {
+            var cetakHobby = ''
+            for (var i = 0; i < this.hobi.length; i++) {
+                cetakHobby += (i + 1) + ". " + this.hobi[i] + '\n'
+            }
+            console.log(
+                'Hobby ' + this.nama + ':\n' +
+                cetakHobby
+            )
+        }
+        // sebutkanHobby: function() {
+        //     console.log("Hobby caca:");
+        //     for (var i = 0; i < this.hobi.length; i++) {
+        //         console.log((i + 1) + ". " + this.hobi[i]);
+        //     }
+        // }
+    }
+    caca.sebutkanHobby()
+
+
+    // object 1D
+    var mahasiswa_1D = {
+        nama: 'Aji Kowiyu',
+        pendidikan_sebelumnya: 'SMK',
+        ipk: 3.4,
+        lulus: true,
+    }
+    console.log(mahasiswa_1D.pendidikan_sebelumnya)
+
+    // object 2D
+    var mahasiswa_2D = {
+        nama: 'Aji Kowiyu',
+        pendidikan_sebelumnya: {
+            smk: 'SMK Remaja Pluit',
+            smp: 'SMPN 21',
+            sd: 'SDN 07'
+        },
+        ipk: 3.4,
+        lulus: true,
+    }
+    console.log(mahasiswa_2D.pendidikan_sebelumnya.smk)
+
+    // OBJECT 3D
+    var mahasiswa_3D = {
+        nama: 'Aji Kowiyu',
+        pendidikan_sebelumnya: {
+            smk: {
+                nama_sekolah: 'SMK Remaja Pluit',
+                alamat: 'Jl.Pluit Raya No.88, Jakarta Utara',
+                jurusan: 'Akuntansi'
+            },
+            smp: {
+                nama_sekolah: 'SMPN 21',
+                alamat: 'Jl.Bandengan Utara, Jakarta Utara',
+                jurusan: null
+            },
+            sd: {
+                nama_sekolah: 'SDN 07',
+                alamat: 'Jl.Pluit Timur, Jakarta Utara',
+                jurusan: null
+            }
+        },
+        ipk: 3.4,
+        lulus: true
+    }
+    console.log(mahasiswa_3D.pendidikan_sebelumnya.smk.nama_sekolah)
+
+    // ARRAY  OF OBJECTS
+    var mhsA = {
+        nama: 'Hamada',
+        pendidikan_sebelumnya: 'SMK Akuntansi',
+        ipk: 3.4,
+        lulus: true,
+    }
+
+    var mhsB = {
+        nama: 'Dion',
+        pendidikan_sebelumnya: 'SMK Administrasi',
+        ipk: 3.5,
+        lulus: true,
+    }
+
+    var mhsC = {
+        nama: 'Hardi',
+        pendidikan_sebelumnya: 'SMA IPA',
+        ipk: 3.2,
+        lulus: true,
+    }
+
+    console.log(`Nama: ${mhsA.nama}\nIPK: ${mhsA.ipk}`)
+    console.log(`Nama: ${mhsB.nama}\nIPK: ${mhsB.ipk}`)
+    console.log(`Nama: ${mhsC.nama}\nIPK: ${mhsC.ipk}`)
+
+    var mhsAll = [
+        {
+            nama: 'Hamada',
+            pendidikan_sebelumnya: 'SMK Akuntansi',
+            ipk: 3.4,
+            lulus: true
+        },
+        {
+            nama: 'Dion',
+            pendidikan_sebelumnya: 'SMK Administrasi',
+            ipk: 3.5,
+            lulus: true
+        },
+        {
+            nama: 'Hardi',
+            pendidikan_sebelumnya: 'SMA IPA',
+            ipk: 3.2,
+            lulus: true
+        },
+        {
+            nama: 'Catherine',
+            pendidikan_sebelumnya: 'SMA IPA',
+            ipk: 3.2,
+            lulus: true
+        }
+    ]
+
+    for (let i = 0; i < mhsAll.length; i++) {
+        console.log(`Nama: ${mhsAll[i].nama}\nIPK: ${mhsAll[i].ipk}`)
+    }
+
+</script>

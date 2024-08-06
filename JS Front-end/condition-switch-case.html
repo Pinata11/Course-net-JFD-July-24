@@ -1,0 +1,34 @@
+<script>
+
+    // detected, karena value pasti
+    var pesanan = "kopi"
+    switch (pesanan) {
+        case "kopi":
+            console.log("anda akan mendapatkan kopi")
+            break
+        case "teh":
+            console.log("anda akan mendapatkan teh")
+            break
+        case "susu":
+            console.log("anda akan mendapatkan susu")
+            break
+        default:
+            console.log("pesanan yang anda masukkan salah")
+            break
+    }
+
+    // not detected, karena value tidak pasti
+    var nilai = 82.77
+    switch (nilai) {
+        case nilai >= 90 && nilai <= 100: 
+            console.log("Anda mendapatkan nilai A")
+            break
+        case nilai >= 80 && nilai < 90: 
+            console.log("Anda mendapatkan nilai B")
+            break
+        default:
+            console.log("Anda mendapatkan nilai yang salah")
+            break
+    }
+
+</script>

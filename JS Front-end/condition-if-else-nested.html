@@ -1,0 +1,63 @@
+<script>
+
+    // A  => 86 -100
+    // A- => 81 - 85
+    // B+ => 76 - 80
+    // B  => 71 - 75
+    // B- => 66 - 70
+    // C+ => 61 - 65
+    // C  => 56 - 60
+    // C- => 51 - 55
+    // D+ => 46 - 50
+    // D  => 0 - 45
+
+    var nilai = 90
+
+    if (nilai >= 81 && nilai <= 100) {
+        if (nilai >= 86 && nilai <= 100) {
+            console.log("A")
+        } else {
+            console.log("A-")
+        }
+    } else if (nilai >= 66 && nilai < 81) {
+        if (nilai >= 76 && nilai < 81) {
+            console.log("B+")
+        } else if (nilai >= 71 && nilai < 76) {
+            console.log("B")
+        } else {
+            console.log("B-")
+        }
+    } else if (nilai >= 51 && nilai < 66) {
+        if (nilai >= 61 && nilai < 66) {
+            console.log("C+")
+        } else if (nilai >= 56 && nilai < 61) {
+            console.log("C")
+        } else {
+            console.log("C-")
+        }
+    } else if (nilai >= 0 && nilai < 51) {
+        if (nilai >= 46 && nilai < 51) {
+            console.log("D+")
+        } else {
+            console.log("D")
+        }
+    } else if (nilai > 100) {
+        console.log("Nilai maksimal adalah 100")
+    } else {
+        console.log("Tidak bisa input nilai")
+    }
+
+
+    var cuaca = "hujan"
+    var lapar = true
+
+    if (cuaca == 'terang') {
+        console.log("Anda bisa berjalan")
+    } else {
+        if (lapar) {
+            console.log("Masak mie")
+        } else {
+            console.log("Nonton")
+        }
+    }
+</script>

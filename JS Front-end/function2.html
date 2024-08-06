@@ -1,0 +1,52 @@
+<script>
+
+    function cek_gelar(pendidikan, gelar) {
+        if (pendidikan == 'S1' || pendidikan == 'S2' || pendidikan == 'S3') {
+            gelar = ', ' + gelar
+        } else {
+            gelar = ''
+        }
+        return gelar
+    }
+
+    function hitung_umur(tahun_lahir) {
+        var proses = (new Date().getFullYear() - tahun_lahir) + ' Tahun'
+        return proses
+    }
+
+    function cetak_biodata(nama_depan, nama_belakang, gelar, alamat, pendidikan, pekerjaan, tahun_lahir) {
+        console.log(
+            'Biodata Peserta Kursus \n' +
+            '========================== \n' +
+            'Nama Lengkap : ' + nama_depan + ' ' + nama_belakang + cek_gelar(pendidikan, gelar) + '\n' +
+            'Alamat : ' + alamat + '\n' +
+            'Pendidikan terakhir : ' + pendidikan + '\n' +
+            'Pekerjaan : ' + pekerjaan + '\n' +
+            'Kelahiran : ' + tahun_lahir + '\n' +
+            'Umur saat ini : ' + hitung_umur(tahun_lahir)
+        )
+
+        console.log(
+            `
+            Biodata Peserta Kursus
+            =======================
+            Nama Lengkap : ${nama_depan} ${nama_belakang} ${cek_gelar(pendidikan, gelar)}
+            Alamat : ${alamat}
+            Pendidikan terakhir : ${pendidikan}
+            Pekerjaan : ${pekerjaan}
+            Kelahiran : ${tahun_lahir}
+            Umur saat ini : ${hitung_umur(tahun_lahir)}
+            `
+        )
+    }
+
+    function cetak_profil(tahun_lahir) {
+        console.log('Umur kamu saat ini adalah : ' + hitung_umur(tahun_lahir))
+    }
+
+    // Memanggil fungsi cetak_biodata dan cetak_profil
+    cetak_biodata('Davin', 'Nicholson', 'S.Kom', 'BSD', 'S1', 'Mahasiswa', 2003)
+    cetak_profil(2003)
+
+
+</script>

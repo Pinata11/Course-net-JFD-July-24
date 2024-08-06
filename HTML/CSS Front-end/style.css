@@ -1,0 +1,24 @@
+body {
+    background-color: bisque;
+}
+table {
+    text-align: center;
+    border: 1px solid #ff0000;
+    border-style: none;
+}
+th {
+    font-size: 24px;
+}
+td {
+    font-size: 20px;
+}
+
+#test {
+    color: #3b3b3b;
+    background-color: aliceblue;
+}
+
+.text {
+    color: cornflowerblue;
+    background-color: steelblue;
+}
