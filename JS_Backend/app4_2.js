@@ -1,6 +1,6 @@
 const http = require('http')
 const fs = require('fs')
-const mysql = require('mysql'); // Make sure to include this if it's not already in your code
+const mysql = require('mysql')
 
 const db = mysql.createConnection({
     host: 'localhost',

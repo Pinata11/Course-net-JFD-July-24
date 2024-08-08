@@ -1,6 +1,9 @@
 const http = require('http')
 const fs = require('fs')
-const mysql = require('mysql'); // Make sure to include this if it's not already in your code
+const mysql = require('mysql2')
+const URL = require('url')
+const qs = require('querystring')
+
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -12,6 +15,23 @@ const db = mysql.createConnection({
 db.connect()
 
 let server = http.createServer(function (request, response) {
+    // console.log(qs.parse(URL.parse(request.url).query).Name)
+    let qstring = qs.parse(URL.parse(request.url).query)
+    console.log(qstring.Name)
+    if (qstring.Name) {
+        db.query(`SELECT * FROM karyawan WHERE Name = ?`, [qstring.Name], function (error, hasil) {
+            if (error) {
+                console.log(error)
+            } else {
+                response.write (
+                    `<pre>
+                     ${JSON.stringify(hasil)}
+                     <pre>`
+                )
+            }
+        })
+    }
+
     if (request.url == '/') {
         response.writeHead(200, {'Content-Type': 'text/html'})
         fs.createReadStream('./view/home.html').pipe(response)
