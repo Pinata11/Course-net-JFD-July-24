@@ -17,13 +17,13 @@ db.connect()
 let server = http.createServer(function (request, response) {
     // console.log(qs.parse(URL.parse(request.url).query).Name)
     let qstring = qs.parse(URL.parse(request.url).query)
-    console.log(qstring.Name)
-    if (qstring.Name) {
-        db.query(`SELECT * FROM karyawan WHERE Name = ?`, [qstring.Name], function (error, hasil) {
+    console.log(qstring)
+    if (qstring.name) {
+        db.query(`SELECT * FROM karyawan WHERE Name = ?`, [qstring.name], function (error, hasil) {
             if (error) {
                 console.log(error)
             } else {
-                response.write (
+                return response.write (
                     `<pre>
                      ${JSON.stringify(hasil)}
                      <pre>`
