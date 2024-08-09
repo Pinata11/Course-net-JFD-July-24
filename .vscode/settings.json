@@ -1,0 +1,41 @@
+{
+  "explorer.autoRevealExclude": {
+    "**/node_modules": false
+  },
+  "search.exclude": {
+    "**/node_modules": false,
+    "**/node_modules/**": true
+  },
+  "editor.tokenColorCustomizations": {
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "textMateRules": [
+      {
+        "scope": "keyword.operator.relational.js",
+        "settings": {
+          "foreground": "#e5ff00"
+        }
+      }
+    ]
+  },
+
+  "window.autoDetectColorScheme": false,
+}

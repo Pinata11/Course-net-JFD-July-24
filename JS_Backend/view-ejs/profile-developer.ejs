@@ -1,0 +1,41 @@
+<h1>My Profile</h1>
+<hr />
+Nama : Davin N <br />
+Alamat : BSD <br />
+No. Telp : 08119252563 <br />
+Role : <%= role %> <br />
+Gender : <%= gender %> <br />
+Gaji : Rp <%= gaji.tolocaleString('id-ID') %> <br>
+
+<% if (gaji > 5000000) { %>
+    Status : <b> Kena pajak penghasilan 2.5% </b>
+<% } else { %>
+    Status : <b> Belum kena pajak penghasilan </b>
+<% } %>
+
+<hr />
+
+<% 
+  if (gaji > 5000000) {
+    __append('Status : <b> Kena pajaka penghasilan 2.5% </b>')
+  } else {
+    __append('Status : <b> Belum kena pajak penghasilan </b>')
+  }
+%>
+
+<hr />
+<hr />
+<a href="/profile">
+  <button>Profile</button>
+</a>
+<br />
+<a href="/contact">
+  <button>Contact</button>
+</a>
+<style>
+  button {
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+  }
+</style>
