@@ -2,10 +2,17 @@
     .padding-td {
         padding: 5px;
     }
+
+    button {
+        cursor: pointer;
+    }
 </style>
 
 <h1>Data Seluruh Karyawan PT Konoha Makmur Sentosa</h1>
 <hr>
+<a href="/karyawan/tambah">
+    <button style="margin-bottom: 5px;">Add</button>
+</a>
 
 <table border="1">
     <thead>
@@ -13,18 +20,24 @@
             <th class="padding-td">Nama</th>
             <th class="padding-td">Gender</th>
             <th class="padding-td">NIP</th>
-            <th class="padding-td">Pilihan</th>
+            <th class="padding-td" colspan="2">Pilihan</th>
         </tr>
     </thead>
     <tbody>
         <% for (let i = 0; i < karyawan.length; i++) { %>
             <tr>
-                <td class="padding-td"><%= karyawan[i].nama %></td>
-                <td class="padding-td"><%= karyawan[i].gender %></td>
-                <td class="padding-td"><%= karyawan[i].nip %></td>
+                <td class="padding-td"><%= karyawan[i].Name %></td>
+                <td class="padding-td"><%= karyawan[i].Gender %></td>
+                <td class="padding-td"><%= karyawan[i].NIP %></td>
                 <td class="padding-td">
                     <a href="/karyawan/detail/<%= karyawan[i].id %>">
-                        <button>Lihat detail</button>
+                        <button style="background-color: rgb(96, 152, 255);" >Lihat detail</button>
+                    </a>
+                </td>
+                <td class="padding-td">
+                    <a href="/karyawan/hapus/<%= karyawan[i].id %>"
+                    onclick="return confirm('Are you sure want to delete <%= karyawan[i].Name %> ?')">
+                        <button style="background-color: rgb(255, 111, 111); color: white;">Delete</button>
                     </a>
                 </td>
             </tr>

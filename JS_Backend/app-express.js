@@ -53,7 +53,7 @@ function get_semuaKaryawan() {
 
 // gunakan async await, untuk memaksa node js
 // menunggu script yg dipanggil sampai selesai di ekseskusi
-app.get('/karyawan', async function(req,res) {
+app.get('/karyawan', async (req,res) => {
   let dataview = {
       karyawan: await get_semuaKaryawan()
   }
@@ -62,7 +62,7 @@ app.get('/karyawan', async function(req,res) {
 
 
 
-app.get('/karyawan/detail/:id_karyawan', async function(req,res) {
+app.get('/karyawan/detail/:id_karyawan', async (req,res) => {
 
   // ambil id yang dikirim via url
   let idk = req.params.id_karyawan
@@ -83,9 +83,9 @@ function get_satuKaryawan(idk) {
             FROM karyawan
             LEFT JOIN department  ON department.ID = karyawan.department_ID
             LEFT JOIN agama  ON agama.ID = karyawan.agama_ID
-            WHERE karyawan.id = ?`;
+            WHERE karyawan.ID = ?`;
   return new Promise( (resolve,reject)=>{
-      db.query(sql, [idk], function(errorSql, hasil) {
+      db.query(sql, [idk], (errorSql, hasil) => {
           if (errorSql) {
               reject(errorSql)
           } else {
@@ -94,6 +94,37 @@ function get_satuKaryawan(idk) {
       })
   })
 }
+
+app.get('/karyawan/hapus/:id_karyawan', async (req,res) => {
+  let idk = req.params.id_karyawan
+  
+  try {
+    let hapus = await hapus_satuKaryawan(idk)
+    if (hapus.affectedRows > 0) {
+      res.redirect('/karyawan')
+    }
+  } catch (error) {
+    throw error
+  }
+})
+
+function hapus_satuKaryawan(idk) {
+  let sql = `DELETE FROM karyawan
+            WHERE ID = ?`;
+  return new Promise( (resolve,reject)=>{
+      db.query(sql, [idk], (errorSql, hasil) => {
+          if (errorSql) {
+              reject(errorSql)
+          } else {
+              resolve(hasil)
+          }
+      })
+  })
+}
+
+app.get('/karyawan/tambah', (req,res) => {
+  res.render('karyawan/form-tambah')
+})
 
 app.listen(port, () =>
   console.log(`Server is running, open it in http://localhost:` + port)
