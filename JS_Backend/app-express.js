@@ -10,6 +10,8 @@ const db        = mysql.createConnection({
 })
 db.connect()
 
+// untuk mengambil data yg ter-encoded(enkripsi) dari form html yg dikirimkan melalui protokol http
+app.use(express.urlencoded({extended:false}))
 app.set('view engine', 'ejs')
 app.set('views', './view-ejs')
 
@@ -81,8 +83,8 @@ function get_satuKaryawan(idk) {
                 department.Code AS code_dept, department.Name AS name_dept,
                 agama.Name AS name_agama
             FROM karyawan
-            LEFT JOIN department  ON department.ID = karyawan.department_ID
-            LEFT JOIN agama  ON agama.ID = karyawan.agama_ID
+            LEFT JOIN department  ON department.ID = karyawan.department_id
+            LEFT JOIN agama  ON agama.ID = karyawan.agama_id
             WHERE karyawan.ID = ?`;
   return new Promise( (resolve,reject)=>{
       db.query(sql, [idk], (errorSql, hasil) => {
@@ -95,24 +97,29 @@ function get_satuKaryawan(idk) {
   })
 }
 
-app.get('/karyawan/hapus/:id_karyawan', async (req,res) => {
+app.get('/karyawan/hapus/:id_karyawan', async function(req,res) {
+  // ambil id yang dikirim via url
   let idk = req.params.id_karyawan
-  
+
+  // proses hapus data
   try {
-    let hapus = await hapus_satuKaryawan(idk)
-    if (hapus.affectedRows > 0) {
-      res.redirect('/karyawan')
-    }
+      let hapus = await hapus_satuKaryawan(idk)
+      if (hapus.affectedRows > 0) {
+          res.redirect('/karyawan')
+      }
   } catch (error) {
-    throw error
+      throw error
   }
 })
 
+
 function hapus_satuKaryawan(idk) {
-  let sql = `DELETE FROM karyawan
-            WHERE ID = ?`;
+  let sql = 
+  `DELETE FROM karyawan
+  WHERE id = ?`;
+
   return new Promise( (resolve,reject)=>{
-      db.query(sql, [idk], (errorSql, hasil) => {
+      db.query(sql, [idk], function(errorSql, hasil) {
           if (errorSql) {
               reject(errorSql)
           } else {
@@ -125,6 +132,40 @@ function hapus_satuKaryawan(idk) {
 app.get('/karyawan/tambah', (req,res) => {
   res.render('karyawan/form-tambah')
 })
+
+app.post('/karyawan/proses-insert', async (req,res) => {
+  // terima kiriman dataa dari form html
+  console.log(req.body)
+  console.log(req.body.form_full_name)
+  let body = req.body
+  try {
+    let insert = await insert_karyawan(req)
+      if (insert.affectedRows > 0) {
+        res.redirect('/karyawan')
+      }
+  } catch (error) {
+    throw error
+  }
+})
+
+function insert_karyawan(req) {
+  let data = {
+    Name    : req.body.form_full_name,
+    Gender  : req.body.form_gender,
+    Address : req.body.form_address,
+    NIP     : req.body.form_nip,
+  }
+  let sql = 'INSERT INTO karyawan SET ?';
+  return new Promise( (resolve,reject)=>{
+      db.query(sql, [data], (errorSql, hasil) => {
+          if (errorSql) {
+              reject(errorSql)
+          } else {
+              resolve(hasil)
+          }
+      })
+  })
+}
 
 app.listen(port, () =>
   console.log(`Server is running, open it in http://localhost:` + port)
