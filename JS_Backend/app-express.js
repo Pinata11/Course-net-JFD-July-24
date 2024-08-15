@@ -186,10 +186,12 @@ app.post('/karyawan/proses-insert', async (req,res) => {
 
 function insert_karyawan(req) {
   let data = {
-    Name    : req.body.form_full_name,
-    Gender  : req.body.form_gender,
-    Address : req.body.form_address,
-    NIP     : req.body.form_nip,
+    Name          : req.body.form_full_name,
+    Gender        : req.body.form_gender,
+    Address       : req.body.form_address,
+    NIP           : req.body.form_nip,
+    department_id : req.body.form_department,
+    agama_id      : req.body.form_agama,
   }
   let sql = 'INSERT INTO karyawan SET ?';
   return new Promise( (resolve,reject)=>{

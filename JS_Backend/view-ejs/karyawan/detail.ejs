@@ -3,12 +3,17 @@
 <% } else { %>
     <h1>Detail karyawan</h1>
     <hr>
-    <b>Nama</b>: <%= pegawai[0].Name %> <br>
-    <b>Gender</b>: <%= (pegawai[0].Gender == 'L') ? 'Laki' : 'Perempuan' %> <br>
-    <b>Tempat tinggal</b>: <%= pegawai[0].Address %> <br>
-    <b>Nomor Induk Pegawai</b>: <%= pegawai[0].NIP %> <br>
-    <b>Departemen</b>: <%= pegawai[0].code_dept %> (<%= pegawai[0].name_dept %>) <br>
-    <b>Agama</b>: <%= pegawai[0].name_agama %> <br>
+    <b>Nama :</b> <%= pegawai[0].Name %> <br>
+    <b>Gender :</b> <%= (pegawai[0].Gender == 'L') ? 'Laki' : 'Perempuan' %> <br>
+    <b>Tempat tinggal :</b> <%= pegawai[0].Address %> <br>
+    <b>Nomor Induk Pegawai :</b> <%= pegawai[0].NIP %> <br>
+    <b>Departemen :</b> <%= pegawai[0].code_dept %> (<%= pegawai[0].name_dept %>) <br>
+    <b>Agama :</b> <%= pegawai[0].name_agama %> <br>
     <hr>
-    <%= JSON.stringify(pegawai) %>
 <% } %>
+
+<a href="/karyawan">
+    <button>
+        Kembali ke Daftar Karyawan
+    </button>
+</a>
