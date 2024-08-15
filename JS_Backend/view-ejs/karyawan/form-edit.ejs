@@ -1,6 +1,6 @@
 <h1>Input Karyawan</h1>
 <hr><br>
-<form action="/karyawan/proses-insert" method="post">
+<form action="/karyawan/proses-update/<%= pegawai[0].ID %>" method="post">
     <label>Full name</label>
     <input type="text" name="form_full_name" id="full_name" value="<%= pegawai[0].Name %>" required>
     <br><br>
@@ -38,19 +38,19 @@
     </select>
     <br><br>
 
-    <button type="submit">Save</button>
+    <button type="submit">Update</button>
 </form>
 
 <style>
     #department {
         width: 20%; 
-        height: 5.5%;
+        height: 3%;
         border-radius: 8px;
     }
 
     #agama {
         width: 10%; 
-        height: 5.5%; 
+        height: 3%; 
         border-radius: 8px;
     }
 </style>

@@ -215,6 +215,41 @@ app.get('/karyawan/edit/:id_karyawan', async (req,res) => {
   res.render('karyawan/form-edit', dataview)
 })
 
+app.post('/karyawan/proses-update/:id_karyawan', async (req,res) => {
+  let idk = req.params.id_karyawan
+  try {
+      let update = await update_karyawan(req, idk)
+      if (update.affectedRows > 0) {
+          res.redirect('/karyawan')
+      }
+  } catch (error) {
+      throw error
+  }
+})
+
+
+function update_karyawan(req, idk) {
+  let data = {
+    Name          : req.body.form_full_name,
+    Gender        : req.body.form_gender,
+    Address       : req.body.form_address,
+    NIP           : req.body.form_nip,
+    department_id : req.body.form_department,
+    agama_id      : req.body.form_agama
+  }
+  let sql = `UPDATE karyawan SET ? WHERE id = ?`;
+
+  return new Promise( (resolve,reject)=>{
+      db.query(sql, [data, idk], function(errorSql, hasil) {
+          if (errorSql) {
+              reject(errorSql)
+          } else {
+              resolve(hasil)
+          }
+      })
+  })
+}
+
 app.listen(port, () =>
   console.log(`Server is running, open it in http://localhost:` + port)
 )
