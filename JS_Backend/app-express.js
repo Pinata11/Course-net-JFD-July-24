@@ -10,14 +10,18 @@ const db        = mysql.createConnection({
 })
 db.connect()
 
-// untuk mengambil data yg ter-encoded(enkripsi) dari form html yg dikirimkan melalui protokol http
+
+// untuk mengambil data yg ter-encoded(enkripsi) dari form html 
+// yg dikirimkan melalui protokol http
 app.use(express.urlencoded({extended:false}))
 app.set('view engine', 'ejs')
 app.set('views', './view-ejs')
 
+
 app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
+
 
 app.get('/contact', (req, res) => {
   let contact = {
@@ -29,6 +33,7 @@ app.get('/contact', (req, res) => {
   res.render('contact', contact)
 })
 
+
 app.get('/profile', (req, res) => {
   let profile = {
     role: 'Web Developer',
@@ -37,6 +42,7 @@ app.get('/profile', (req, res) => {
   }
   res.render('profile-developer', profile)
 })
+
 
 // buat function terpisah untuk
 // proses pengambilan data dari mysql
@@ -78,14 +84,16 @@ app.get('/karyawan/detail/:id_karyawan', async (req,res) => {
 
 
 function get_satuKaryawan(idk) {
-  let sql = `SELECT
-                karyawan.*,
-                department.Code AS code_dept, department.Name AS name_dept,
-                agama.Name AS name_agama
-            FROM karyawan
-            LEFT JOIN department  ON department.ID = karyawan.department_id
-            LEFT JOIN agama  ON agama.ID = karyawan.agama_id
-            WHERE karyawan.ID = ?`;
+  let sql = 
+    `SELECT
+        karyawan.*,
+        department.Code AS code_dept, department.Name AS name_dept,
+        agama.Name AS name_agama
+    FROM karyawan
+    LEFT JOIN department  ON department.ID = karyawan.department_id
+    LEFT JOIN agama  ON agama.ID = karyawan.agama_id
+    WHERE karyawan.ID = ?`;
+
   return new Promise( (resolve,reject)=>{
       db.query(sql, [idk], (errorSql, hasil) => {
           if (errorSql) {
@@ -96,6 +104,7 @@ function get_satuKaryawan(idk) {
       })
   })
 }
+
 
 app.get('/karyawan/hapus/:id_karyawan', async function(req,res) {
   // ambil id yang dikirim via url
@@ -129,15 +138,42 @@ function hapus_satuKaryawan(idk) {
   })
 }
 
-app.get('/karyawan/tambah', (req,res) => {
-  res.render('karyawan/form-tambah')
+app.get('/karyawan/tambah', async (req,res) => {
+  let dataview = {
+      dept: await get_semuaDepartment(),
+      agm: await get_semuaAgama(),
+  }
+  res.render('karyawan/form-tambah', dataview)
 })
+
+function get_semuaDepartment() {
+  return new Promise( (resolve,reject)=>{
+      db.query("SELECT * FROM department", function(errorSql, hasil) {
+          if (errorSql) {
+              reject(errorSql)
+          } else {
+              resolve(hasil)
+          }
+      })
+  })
+}
+
+function get_semuaAgama() {
+  return new Promise( (resolve,reject)=>{
+      db.query("SELECT * FROM agama", function(errorSql, hasil) {
+          if (errorSql) {
+              reject(errorSql)
+          } else {
+              resolve(hasil)
+          }
+      })
+  })
+}
 
 app.post('/karyawan/proses-insert', async (req,res) => {
   // terima kiriman dataa dari form html
-  console.log(req.body)
-  console.log(req.body.form_full_name)
-  let body = req.body
+  // let body = req.body
+
   try {
     let insert = await insert_karyawan(req)
       if (insert.affectedRows > 0) {

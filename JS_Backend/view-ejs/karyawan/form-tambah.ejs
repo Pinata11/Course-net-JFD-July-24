@@ -1,8 +1,8 @@
 <h1>Input Karyawan</h1>
-<hr>
+<hr><br>
 <form action="/karyawan/proses-insert" method="post">
     <label>Full name</label>
-    <input type="text" name="form_full_name" id="full_name">
+    <input type="text" name="form_full_name" id="full_name" required>
     <br><br>
 
     <label>Gender</label>
@@ -13,12 +13,44 @@
     <br><br>
 
     <label>Address</label>
-    <textarea name="form_address" id="address" cols="20" rows="5"></textarea>
+    <textarea name="form_address" id="address" cols="20" rows="5" required></textarea>
     <br><br>
 
     <label>Nomor Induk Pegawai (NIP)</label>
-    <input type="text" name="form_nip" id="nip">
+    <input type="text" name="form_nip" id="nip" required>
+    <br><br>
+
+    <label>Department</label>
+    <select name="form_department" id="department" required>
+        <option value="" style="text-align: center;">--Select--</option>
+        <% for(let i =0; i < dept.length; i++) { %>
+            <option value="<%= dept[i].ID %>"><%= dept[i].Name %></option>
+        <% } %>
+    </select>
+    <br><br>
+
+    <label>Religion</label>
+    <select name="form_agama" id="agama" required>
+        <option value="" style="text-align: center;">--Select--</option>
+        <% for(let i =0; i < agm.length; i++) { %>
+            <option value="<%= agm[i].ID %>"><%= agm[i].Name %></option>
+        <% } %>
+    </select>
     <br><br>
 
     <button type="submit">Save</button>
 </form>
+
+<style>
+    #department {
+        width: 20%; 
+        height: 5.5%;
+        border-radius: 8px;
+    }
+
+    #agama {
+        width: 10%; 
+        height: 5.5%; 
+        border-radius: 8px;
+    }
+</style>
