@@ -1,0 +1,56 @@
+<h1>Input Karyawan</h1>
+<hr><br>
+<form action="/karyawan/proses-insert" method="post">
+    <label>Full name</label>
+    <input type="text" name="form_full_name" id="full_name" value="<%= pegawai[0].Name %>" required>
+    <br><br>
+
+    <label>Gender</label>
+    <input type="radio" name="form_gender" id="gender_l" value="L" <%= (pegawai[0].Gender == 'L') ? 'checked' : '' %> required>
+    <label>Laki-laki</label>
+    <input type="radio" name="form_gender" id="gender_p" value="P" <%= (pegawai[0].Gender == 'P') ? 'checked' : '' %> required>
+    <label>Perempuan</label>
+    <br><br>
+
+    <label>Address</label>
+    <textarea name="form_address" id="address" required><%= pegawai[0].Address %></textarea>
+    <br><br>
+
+    <label>Nomor Induk Pegawai (NIP)</label>
+    <input type="text" name="form_nip" id="nip" value="<%= pegawai[0].NIP %>" required>
+    <br><br>
+
+    <label>Department</label>
+    <select name="form_department" id="department" required>
+        <option value="" style="text-align: center;">--Select--</option>
+        <% for(let i =0; i < dept.length; i++) { %>
+            <option <%= (pegawai[0].department_id == dept[i].ID) ? 'selected' : '' %> value="<%= dept[i].ID %>"><%= dept[i].Name %></option>
+        <% } %>
+    </select>
+    <br><br>
+
+    <label>Religion</label>
+    <select name="form_agama" id="agama" required>
+        <option value="" style="text-align: center;">--Select--</option>
+        <% for(let i =0; i < agm.length; i++) { %>
+            <option <%= (pegawai[0].agama_id == agm[i].ID) ? 'selected' : '' %> value="<%= agm[i].ID %>"><%= agm[i].Name %></option>
+        <% } %>
+    </select>
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<style>
+    #department {
+        width: 20%; 
+        height: 5.5%;
+        border-radius: 8px;
+    }
+
+    #agama {
+        width: 10%; 
+        height: 5.5%; 
+        border-radius: 8px;
+    }
+</style>

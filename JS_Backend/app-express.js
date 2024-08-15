@@ -205,6 +205,16 @@ function insert_karyawan(req) {
   })
 }
 
+app.get('/karyawan/edit/:id_karyawan', async (req,res) => {
+  let idk = req.params.id_karyawan
+  let dataview = {
+    dept    : await get_semuaDepartment(),
+    agm     : await get_semuaAgama(),
+    pegawai : await get_satuKaryawan(idk),
+  }
+  res.render('karyawan/form-edit', dataview)
+})
+
 app.listen(port, () =>
   console.log(`Server is running, open it in http://localhost:` + port)
 )
