@@ -46,7 +46,8 @@ app.get('/karyawan', async (req,res) => {
 
   let dataview = {
       karyawan: await m_karyawan.get_semuaKaryawan(),
-      message: req.query.msg,
+      update_msg: req.query.umsg,
+      add_msg: req.query.amsg
   }
   res.render('karyawan/index', dataview)
 })
@@ -96,7 +97,7 @@ app.post('/karyawan/proses-insert', async (req,res) => {
   try {
     let insert = await m_karyawan.insert_karyawan(req)
       if (insert.affectedRows > 0) {
-        res.redirect(`/karyawan?msg=berhasil insert ${req.body.form_full_name}`)
+        res.redirect(`/karyawan?amsg=berhasil insert ${req.body.form_full_name}`)
       }
   } catch (error) {
     throw error
@@ -118,7 +119,7 @@ app.post('/karyawan/proses-update/:id_karyawan', async (req,res) => {
   try {
       let update = await m_karyawan.update_karyawan(req, idk)
       if (update.affectedRows > 0) {
-          res.redirect(`/karyawan?msg=berhasil update ${req.body.form_full_name}`)
+          res.redirect(`/karyawan?umsg=berhasil update ${req.body.form_full_name}`)
       }
   } catch (error) {
       throw error
