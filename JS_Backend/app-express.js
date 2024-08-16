@@ -62,8 +62,11 @@ function get_semuaKaryawan() {
 // gunakan async await, untuk memaksa node js
 // menunggu script yg dipanggil sampai selesai di ekseskusi
 app.get('/karyawan', async (req,res) => {
+  // ambil object query string msg
+
   let dataview = {
-      karyawan: await get_semuaKaryawan()
+      karyawan: await get_semuaKaryawan(),
+      message: req.query.msg,
   }
   res.render('karyawan/index', dataview)
 })
@@ -177,7 +180,7 @@ app.post('/karyawan/proses-insert', async (req,res) => {
   try {
     let insert = await insert_karyawan(req)
       if (insert.affectedRows > 0) {
-        res.redirect('/karyawan')
+        res.redirect(`/karyawan?msg=berhasil insert ${req.body.form_full_name}`)
       }
   } catch (error) {
     throw error
@@ -220,7 +223,7 @@ app.post('/karyawan/proses-update/:id_karyawan', async (req,res) => {
   try {
       let update = await update_karyawan(req, idk)
       if (update.affectedRows > 0) {
-          res.redirect('/karyawan')
+          res.redirect(`/karyawan?msg=berhasil update ${req.body.form_full_name}`)
       }
   } catch (error) {
       throw error
